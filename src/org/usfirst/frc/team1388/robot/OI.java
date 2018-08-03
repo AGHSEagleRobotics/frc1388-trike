@@ -7,11 +7,7 @@
 
 package org.usfirst.frc.team1388.robot;
 
-import org.usfirst.frc1388.commands.DeployArms;
-
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -46,29 +42,41 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	private XboxController driveController;
-    private XboxController opController;
+    //private XboxController opController;
     public OI() {
         driveController = new XboxController(0);
-        opController = new XboxController(1);
+        //opController = new XboxController(1);
     }
 
     public XboxController getDriveController() {
     	return driveController;
     }
-    
+  /*  
     public XboxController getOpController() {
     	return opController;
-    }
+    }*/
+    
     //TODO add a deadband that works
     double deadBandAmount = 0.05;
-    double joyArray
-    public double deadBand(double deadBandAmount, double x, double y) {
+    public double deadBand(double deadBandAmount, double x) {
     	if(Math.abs(x) < deadBandAmount) {
     		x = 0;
     	}
-    	if(Math.abs(y) < deadBandAmount) {
-    		y = 0;
-    	}
-    	return x,y;
+    	return x;
     }
+    
+    public double getTargetAngle(double axisX, double axisY) {
+    	double targetAngle = Math.atan2(axisY, axisX);
+ 
+    	if(axisX < 0) {
+    		return targetAngle + 180;
+    	}else if (axisY >= 0 ) {
+    		return targetAngle;
+    	}else if( axisY < 0 ){
+    		return targetAngle + 360;
+    	}
+    	
+    	return targetAngle;
+    }
+    
 }

@@ -12,6 +12,8 @@ import org.usfirst.frc1388.lib.SwerveModule;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -24,8 +26,9 @@ import edu.wpi.first.wpilibj.Encoder;
  */
 public class RobotMap {
 	
-	public static TalonSRX driveMotor;
-	public static VictorSPX steerMotor;
+	public static SwerveModule driveTrainSwerveDrive;
+	public static WPI_TalonSRX driveMotor;
+	public static WPI_VictorSPX steerMotor;
 	public static AnalogInput steerEncoder; 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
@@ -37,8 +40,10 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 public static void init() {
-	driveMotor = new TalonSRX(6);
-	steerMotor = new VictorSPX(5);
+	driveMotor = new WPI_TalonSRX(6);
+	steerMotor = new WPI_VictorSPX(5);
 	steerEncoder = new AnalogInput(0);
+	
+	driveTrainSwerveDrive = new SwerveModule(driveMotor, steerMotor, steerEncoder);
 	}	
 }

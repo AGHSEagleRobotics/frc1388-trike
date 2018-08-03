@@ -25,7 +25,7 @@ import org.usfirst.frc.team1388.robot.subsystems.DriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static OI m_oi;
+	public static OI oi;
 	public static DriveTrain driveTrain;
 	
 
@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
+		oi = new OI();
 		driveTrain = new DriveTrain();
 		
 	}

@@ -7,8 +7,10 @@
 
 package org.usfirst.frc.team1388.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1388.robot.Robot;
+import org.usfirst.frc.team1388.robot.RobotMap;
 import org.usfirst.frc1388.lib.SwerveModule;
 
 /**
@@ -28,7 +30,14 @@ public class Drive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		double speedY = Robot.oi.getDriveController().getY(Hand.kRight);
+		double axisY = Robot.oi.getDriveController().getY(Hand.kLeft);
+		double axisX = Robot.oi.getDriveController().getX(Hand.kLeft);
 		
+		
+		
+		RobotMap.driveTrainSwerveDrive.setDrivePwr(Robot.oi.deadBand(.05, speedY));
+		RobotMap.driveTrainSwerveDrive.setSteerAngle(targetAngle);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -40,11 +49,14 @@ public class Drive extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		RobotMap.driveTrainSwerveDrive.setDrivePwr(0.0);
+		
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		end();
 	}
 }
