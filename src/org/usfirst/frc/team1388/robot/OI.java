@@ -57,22 +57,21 @@ public class OI {
     }*/
     
     //TODO add a deadband that works
-    double deadBandAmount = 0.05;
-    public double deadBand(double deadBandAmount, double x) {
+    //double deadBandAmount = 0.05;
+    public static double deadBand(double deadBandAmount, double x) {
     	if(Math.abs(x) < deadBandAmount) {
     		x = 0;
     	}
     	return x;
     }
     
-    public double getTargetAngle(double axisX, double axisY) {
-    	double targetAngle = Math.atan2(axisY, axisX);
- 
-    	if(axisX < 0) {
-    		return targetAngle + 180;
-    	}else if (axisY >= 0 ) {
-    		return targetAngle;
-    	}else if( axisY < 0 ){
+    //takes two joystick axis inputs, converts them into a target angle, normalized to 0 to 360
+    public static double getTargetAngle(double axisX, double axisY) {
+    	double targetAngle = Math.atan2(axisX, -axisY);
+    	
+    	targetAngle *= 180/Math.PI;
+
+    	if( targetAngle < 0 ){
     		return targetAngle + 360;
     	}
     	

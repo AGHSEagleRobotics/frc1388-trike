@@ -7,8 +7,7 @@
 
 package org.usfirst.frc.team1388.robot;
 
-import org.usfirst.frc.team1388.swerve.subsystems.DriveModule;
-import org.usfirst.frc1388.lib.SwerveModule;
+import org.usfirst.frc.team1388.robot.lib.SwerveModule;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -25,7 +24,7 @@ import edu.wpi.first.wpilibj.Encoder;
  * floating around.
  */
 public class RobotMap {
-	
+
 	public static SwerveModule driveTrainSwerveDrive;
 	public static WPI_TalonSRX driveMotor;
 	public static WPI_VictorSPX steerMotor;
@@ -39,11 +38,13 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-public static void init() {
-	driveMotor = new WPI_TalonSRX(6);
-	steerMotor = new WPI_VictorSPX(5);
-	steerEncoder = new AnalogInput(0);
-	
-	driveTrainSwerveDrive = new SwerveModule(driveMotor, steerMotor, steerEncoder);
+	public static void init() {
+		
+		driveMotor = new WPI_TalonSRX(17); //make correct, adjust CAN IDs for inputs decided by programmer
+		steerMotor = new WPI_VictorSPX(4);
+		steerMotor.setInverted(true);
+		steerEncoder = new AnalogInput(0);
+
+		driveTrainSwerveDrive = new SwerveModule(driveMotor, steerMotor, steerEncoder);
 	}	
 }

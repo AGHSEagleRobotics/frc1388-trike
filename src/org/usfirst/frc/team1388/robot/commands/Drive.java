@@ -9,9 +9,10 @@ package org.usfirst.frc.team1388.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team1388.robot.OI;
 import org.usfirst.frc.team1388.robot.Robot;
 import org.usfirst.frc.team1388.robot.RobotMap;
-import org.usfirst.frc1388.lib.SwerveModule;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -34,9 +35,11 @@ public class Drive extends Command {
 		double axisY = Robot.oi.getDriveController().getY(Hand.kLeft);
 		double axisX = Robot.oi.getDriveController().getX(Hand.kLeft);
 		
+		double targetAngle = OI.getTargetAngle(axisX, axisY);
+		System.out.println(targetAngle);
 		
-		
-		RobotMap.driveTrainSwerveDrive.setDrivePwr(Robot.oi.deadBand(.05, speedY));
+		RobotMap.driveTrainSwerveDrive.setDrivePwr(OI.deadBand(0.2, speedY) * -0.75);
+		System.out.println("Drive Power: " + OI.deadBand(0.05, speedY));
 		RobotMap.driveTrainSwerveDrive.setSteerAngle(targetAngle);
 	}
 
